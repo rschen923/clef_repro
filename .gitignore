@@ -18,8 +18,8 @@ ENV/
 # ---- 运行产物（体积大且可由代码再生） ----
 results/*.npz
 results/_run*.log
-figures/_prev_*.png
-figures_en/_prev_*.png
+figures/
+figures_en/
 
 # ---- 编辑器 / 系统 ----
 .vscode/

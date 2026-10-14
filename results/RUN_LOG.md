@@ -7,7 +7,7 @@
 
 ## 0. 环境
 
-- Python 解释器：`C:/Users/CRS/.workbuddy-ai/binaries/python/envs/default/Scripts/python.exe`
+- Python 解释器：`python`（实测环境为 CPython 3.12，虚拟环境）
 - 版本：torch 2.14.1+cpu · numpy 2.5.4 · matplotlib 3.11.2 · scikit-learn 1.9.1 · pandas 3.0.6
 - 设备：**CPU**（无 GPU）
 - 依赖安装（缺失时）：
@@ -20,7 +20,7 @@
 
 ## 1. 主复现命令
 
-在 `D:/workbuddy-ai/worktree/clef_repro/` 下依次执行：
+在仓库根目录 `clef_repro/` 下依次执行：
 
 | # | 命令 | 实测耗时 | 说明 |
 |---|---|---|---|
@@ -38,7 +38,7 @@
 <PY> plots.py && <PY> schematic.py
 ```
 
-`<PY>` = `C:/Users/CRS/.workbuddy-ai/binaries/python/envs/default/Scripts/python.exe`
+`<PY>` = 当前虚拟环境下的 `python`（Windows 下亦可用 `python`，Linux/macOS 下为 `python3`）
 
 **总运行时间 ≈ 5m41s（主实验）+ ~8s（绘图）≈ 6 分钟，远低于 20 分钟上限。**
 

@@ -14,7 +14,7 @@
 
 > Peng Y, Wu J, Sun Y, Zhang Y, Wang Q, Shao S.
 > *Contrastive-learning of language embedding and biological features for cross modality
-> encoding and effector prediction*. **Nature Communications**, 2025.
+> encoding and effector prediction*. **Nature Communications**, 2025, 16:1299.
 > DOI: `10.1038/s41467-025-56526-1`
 > 官方代码仓库：<https://github.com/PengYueECUST1997/CLEF>（MIT 许可）
 > Zenodo 归档：DOI `10.5281/zenodo.14587661`
@@ -22,7 +22,7 @@
 CLEF 的核心思路是：以对比学习把**蛋白语言模型（PLM）表征**与**多源生物学特征**
 对齐到同一表征空间，从而提升 III / IV / VI 型分泌效应蛋白（T3SE / T4SE / T6SE）的预测性能。
 
-**本仓库不是 CLEF 的官方实现，而是课程作业性质的独立复现与扩展研究**：
+**本仓库不是 CLEF 的官方实现，而是课程作业性质的复现与扩展研究**：
 
 - 沿用 CLEF 的双编码器结构与对称 InfoNCE 目标；
 - 把数据替换为**可控的合成生成式基准**（`SyntheticWorld`），以便在无混杂因素干扰的条件下
@@ -81,10 +81,9 @@ python -m pip install -r requirements.txt
 
 python run_experiment.py all        # 主实验 A / B / C / D
 python run_supplementary.py all     # 补充实验 E – K
-python plots.py                     # 主实验配图
-python plots_supplementary.py       # 补充实验配图
-python make_zh_figures.py           # 中文标注版配图
 ```
+
+结果写入 `results/`，配图写入 `figures/`（该目录由脚本自动创建，已被 `.gitignore` 忽略）。
 
 单组运行：
 
@@ -103,7 +102,17 @@ python run_supplementary.py J   # J：模态缺失矩阵
 python run_supplementary.py K   # K：十种子配对显著性检验
 ```
 
+绘图（可选，产物不入库）：
+
+```bash
+python plots.py                     # 主实验配图
+python plots_supplementary.py       # 补充实验配图
+python make_zh_figures.py           # 中文标注版配图
+python schematic.py                 # 框架结构示意图
+```
+
 全部随机性由种子统一控制（NumPy 与 PyTorch 均设种），结果可逐位复现。
+主实验全量约 6 分钟（CPU），补充实验约 20–30 分钟。
 
 ---
 
@@ -122,12 +131,11 @@ clef_repro/
 ├── schematic.py            # 示意图层：框架结构示意图
 ├── make_zh_figures.py      # 中文标注版配图（复用同一批结果文件）
 ├── style_journal.py        # 统一期刊绘图风格
-├── export_data_package.py  # 数据与结果打包导出（含硬编码输出路径，跨平台需手动改）
 ├── requirements.txt
-├── results/                # 运行产物：csv / json / RUN_LOG.md
-├── figures/                # 运行产物：中文标注图
-└── figures_en/             # 运行产物：英文标注图
+└── results/                # 运行产物：csv / json / RUN_LOG.md
 ```
+
+`figures/` 为绘图脚本的输出目录，运行时自动创建，属可再生产物，不纳入版本控制。
 
 ---
 
@@ -163,17 +171,21 @@ reshape 为 `(seq_len=16, tok_dim=32)`；五个生物学模态视角如下（维
 
 ## 六、运行产物
 
-- `results/exp_a.csv|json` —— 实验 A 八臂全指标 + Δ_ASR
-- `results/exp_b*.csv|json`、`exp_c.*`、`exp_d.*` —— 标注预算 / VIB β / 模态噪声
-- `results/exp_e.csv` … `exp_k.csv` —— 补充实验 E – K
-- `results/supplementary.json` —— 补充实验汇总（含幂律拟合系数与显著性统计量）
-- `results/curves.json` —— 对比预训练损失曲线
-- `results/all_results.json` —— 主实验汇总
-- `results/RUN_LOG.md` —— 每条命令、耗时与关键输出（复现时建议先看）
-- `figures/`（中文标注，13 张）、`figures_en/`（英文标注，8 张）
+运行后写入 `results/`：
 
-注：`results/pca_data.npz`（约 829 KB）已由 `.gitignore` 排除，可由
-`python run_experiment.py A` 重新生成。
+| 文件 | 内容 |
+| :-- | :-- |
+| `exp_a.csv` / `exp_a.json` | 实验 A 八臂全指标 + Δ_ASR |
+| `exp_b.csv`、`exp_b_per_cell.csv`、`exp_b.json` | 实验 B 标注预算扫描 |
+| `exp_c.csv|json`、`exp_d.csv|json` | 实验 C 的 VIB β 扫描、实验 D 的模态噪声鲁棒性 |
+| `exp_e.csv` … `exp_k.csv` | 补充实验 E – K |
+| `supplementary.json` | 补充实验汇总（含幂律拟合系数与显著性统计量） |
+| `curves.json` | 对比预训练损失曲线 |
+| `all_results.json` | 主实验汇总 |
+| `RUN_LOG.md` | 每条命令、耗时与关键输出（复现时建议先看） |
+| `pca_data.npz` | PCA 可视化原始表征（约 829 KB，可由实验 A 重新生成） |
+
+注：`pca_data.npz` 与运行日志 `_run*.log` 已由 `.gitignore` 排除，不入库。
 
 ---
 
@@ -197,7 +209,7 @@ reshape 为 `(seq_len=16, tok_dim=32)`；五个生物学模态视角如下（维
 
 | 项目 | 地址 / 标识 |
 | :-- | :-- |
-| 论文 | *Nature Communications* 2025，DOI `10.1038/s41467-025-56526-1`；PMID `39900608`；PMCID `PMC11791096` |
+| 论文 | *Nature Communications* 2025，16:1299，DOI `10.1038/s41467-025-56526-1`；PMID `39900608`；PMCID `PMC11791096` |
 | 官方代码仓库 | <https://github.com/PengYueECUST1997/CLEF>（MIT 许可） |
 | Zenodo 归档 | DOI `10.5281/zenodo.14587661`（MIT 许可） |
 | 研究单位 | 华东理工大学生物反应器工程全国重点实验室（王启要教授课题组） |
@@ -264,5 +276,6 @@ https://github.com/rschen923/clef_repro
 1. **合成基准的外推性有限**。SyntheticWorld 的潜变量结构是线性高斯的，
    真实蛋白序列的流形远比此复杂。本仓库结论应被理解为**机理受控验证**，
    而非真实数据上的性能承诺。
-2. **`export_data_package.py` 内含硬编码的 Windows 输出路径**，
-   在其他环境下运行前需手动修改。
+2. **实验 B 的 Δ_ASR 可能大于 1**。Δ_ASR 的分母为 `(Ceiling − Baseline)`，
+   当标注预算增大时该分母收缩，且本实现中 CLEF 表征质量强于冻结序列表征，
+   故出现 Δ_ASR > 1 的情形。这是如实报告的结果，详细成因见 `results/RUN_LOG.md` 第 6 节。

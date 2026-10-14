@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 """plots_supplementary.py — 把实验 E-K 的真实结果渲染成 5 张报告用图。
 
-产物（同时写入 clef_repro/figures 与 ppt_clef_deck/assets）：
+产物（写入 clef_repro/figures；如需同时输出到另一目录，
+设置环境变量 CLEF_EXTRA_FIG_DIR 指向该目录即可）：
     fig_powerlaw.png    双栏   Δ_ASR 幂律拟合 + 绝对增益曲线
     fig_scale.png       双栏   无标注池规模缩放（ACC 三条线 + Δ_ASR）
     fig_ablation.png    三栏   温度 / 表征维度 / 标签噪声 三联消融
@@ -30,9 +31,13 @@ from style_journal import C, MM, apply_style, panel_label
 HERE = os.path.dirname(os.path.abspath(__file__))
 RESULTS = os.path.join(HERE, "results")
 FIG1 = os.path.join(HERE, "figures")
-FIG2 = os.path.abspath(os.path.join(HERE, "..", "ppt_clef_deck", "assets"))
+# 可选的第二输出目录：由环境变量 CLEF_EXTRA_FIG_DIR 指定，默认不启用。
+# （原实现硬编码写入仓库上级目录 ppt_clef_deck/assets，在其他机器上不可用，已改为可选。）
+FIG2 = os.environ.get("CLEF_EXTRA_FIG_DIR", "").strip()
 os.makedirs(FIG1, exist_ok=True)
-os.makedirs(FIG2, exist_ok=True)
+OUT_DIRS = [FIG1] + ([FIG2] if FIG2 else [])
+for _d in OUT_DIRS:
+    os.makedirs(_d, exist_ok=True)
 
 apply_style()
 
@@ -53,7 +58,7 @@ def _load() -> dict:
 
 
 def _save(fig, name: str) -> None:
-    for p in (FIG1, FIG2):
+    for p in OUT_DIRS:
         fig.savefig(os.path.join(p, name))
     plt.close(fig)
     print("saved", name)
