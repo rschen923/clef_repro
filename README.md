@@ -83,7 +83,7 @@ python run_experiment.py all        # 主实验 A / B / C / D
 python run_supplementary.py all     # 补充实验 E – K
 ```
 
-结果写入 `results/`，配图写入 `figures/`（该目录由脚本自动创建，已被 `.gitignore` 忽略）。
+结果写入 `results/`，配图写入 `figures/`。
 
 单组运行：
 
@@ -102,7 +102,7 @@ python run_supplementary.py J   # J：模态缺失矩阵
 python run_supplementary.py K   # K：十种子配对显著性检验
 ```
 
-绘图（可选，产物不入库）：
+绘图（可选）：
 
 ```bash
 python plots.py                     # 主实验配图
@@ -134,8 +134,6 @@ clef_repro/
 ├── requirements.txt
 └── results/                # 运行产物：csv / json / RUN_LOG.md
 ```
-
-`figures/` 为绘图脚本的输出目录，运行时自动创建，属可再生产物，不纳入版本控制。
 
 ---
 
@@ -183,9 +181,7 @@ reshape 为 `(seq_len=16, tok_dim=32)`；五个生物学模态视角如下（维
 | `curves.json` | 对比预训练损失曲线 |
 | `all_results.json` | 主实验汇总 |
 | `RUN_LOG.md` | 每条命令、耗时与关键输出（复现时建议先看） |
-| `pca_data.npz` | PCA 可视化原始表征（约 829 KB，可由实验 A 重新生成） |
-
-注：`pca_data.npz` 与运行日志 `_run*.log` 已由 `.gitignore` 排除，不入库。
+| `pca_data.npz` | PCA 可视化原始表征（约 829 KB） |
 
 ---
 
