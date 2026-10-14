@@ -1,0 +1,37 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ---- 虚拟环境 ----
+.venv/
+venv/
+env/
+ENV/
+
+# ---- 运行产物（体积大且可由代码再生） ----
+results/*.npz
+results/_run*.log
+figures/_prev_*.png
+figures_en/_prev_*.png
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ---- 数据与模型权重（不入库） ----
+*.ckpt
+*.pth
+*.pt
+*.npz
+*.h5
+data/raw/

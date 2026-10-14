@@ -1,0 +1,54 @@
+{
+  "config": {
+    "exp": "all",
+    "sigma_seq": 13.5,
+    "eff_shift": 6.4,
+    "fam_shift": 3.5,
+    "world_seed": 0,
+    "signal_scale": 8.0,
+    "d_z": 64,
+    "tok_dim": 32,
+    "seq_len": 16,
+    "mod_mask_frac": 0.3,
+    "n_pool": 4000,
+    "n_train": 100,
+    "n_val": 150,
+    "n_test": 800,
+    "n_ceiling": 1500,
+    "data_seed": 1234,
+    "pre_epochs": 50,
+    "tau": 0.5,
+    "seed": 7,
+    "device": "cpu"
+  },
+  "rows": [
+    {
+      "scale": 1,
+      "baseline_ACC": 0.8475,
+      "baseline_MCC": 0.6949528323012252,
+      "clef_ACC": 0.9075,
+      "clef_MCC": 0.8146272104340667,
+      "clef_F1": 0.9028871391076115,
+      "baseline_F1": 0.8415584415584415
+    },
+    {
+      "scale": 2,
+      "baseline_ACC": 0.8475,
+      "baseline_MCC": 0.6949528323012252,
+      "clef_ACC": 0.925,
+      "clef_MCC": 0.8495854198133606,
+      "clef_F1": 0.920844327176781,
+      "baseline_F1": 0.8415584415584415
+    },
+    {
+      "scale": 4,
+      "baseline_ACC": 0.8475,
+      "baseline_MCC": 0.6949528323012252,
+      "clef_ACC": 0.905,
+      "clef_MCC": 0.8094160062895122,
+      "clef_F1": 0.898936170212766,
+      "baseline_F1": 0.8415584415584415
+    }
+  ],
+  "elapsed_sec": 66.31139802932739
+}
