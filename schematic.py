@@ -400,7 +400,7 @@ def _save(fig, name: str) -> None:
     path = os.path.join(FIGURES_DIR, name)
     fig.savefig(path)
     plt.close(fig)
-    print(f"  [schematic] 已保存 {path}")
+    print(f"  [schematic] 已保存 {os.path.relpath(path, HERE).replace(chr(92), '/')}")
 
 
 def main() -> None:

@@ -52,6 +52,18 @@ os.makedirs(RESULTS_DIR, exist_ok=True)
 os.makedirs(FIGURES_DIR, exist_ok=True)
 
 
+def rel(p: str) -> str:
+    """把绝对路径转成相对仓库根目录的路径，仅用于日志与终端输出。
+
+    读写文件仍用绝对路径，但打印给用户看的路径一律相对化，
+    以免日志中泄漏本机的绝对目录结构。
+    """
+    try:
+        return os.path.relpath(p, HERE).replace("\\", "/")
+    except ValueError:
+        return p
+
+
 # ======================================================================================
 # 通用工具
 # ======================================================================================
@@ -511,7 +523,7 @@ def main() -> None:
     with open(os.path.join(RESULTS_DIR, "all_results.json"), "w", encoding="utf-8") as f:
         json.dump(_strip(summary), f, ensure_ascii=False, indent=2,
                   default=lambda o: o.tolist() if isinstance(o, np.ndarray) else str(o))
-    print(f"\n[ALL] 全部实验完成，总用时 {time.time() - t0:.1f}s，结果已写入 {RESULTS_DIR}")
+    print(f"\n[ALL] 全部实验完成，总用时 {time.time() - t0:.1f}s，结果已写入 {rel(RESULTS_DIR)}/")
 
 
 if __name__ == "__main__":

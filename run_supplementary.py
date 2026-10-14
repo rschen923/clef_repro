@@ -32,6 +32,7 @@ import numpy as np
 
 from data import MODALITY_ORDER
 from run_experiment import (
+    rel,
     RESULTS_DIR,
     _build_world,
     _clef_rep,
@@ -422,7 +423,7 @@ def main() -> None:
         payload[g] = GROUPS[g]()
         payload[g]["elapsed_sec"] = time.time() - t0
         _dump(payload)
-        print(f"=== [{g}] 完成，用时 {payload[g]['elapsed_sec']:.1f}s，已写入 {SUPP_PATH} ===")
+        print(f"=== [{g}] 完成，用时 {payload[g]['elapsed_sec']:.1f}s，已写入 {rel(SUPP_PATH)} ===")
 
 
 if __name__ == "__main__":
