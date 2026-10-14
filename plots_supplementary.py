@@ -28,9 +28,9 @@ import numpy as np
 
 from style_journal import C, MM, apply_style, panel_label
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-RESULTS = os.path.join(HERE, "results")
-FIG1 = os.path.join(HERE, "figures")
+# 输入 / 输出目录：相对当前运行目录（请在仓库根目录下运行）
+RESULTS = "results"
+FIG1 = "figures"
 # 可选的第二输出目录：由环境变量 CLEF_EXTRA_FIG_DIR 指定，默认不启用。
 # （原实现硬编码写入仓库上级目录 ppt_clef_deck/assets，在其他机器上不可用，已改为可选。）
 FIG2 = os.environ.get("CLEF_EXTRA_FIG_DIR", "").strip()

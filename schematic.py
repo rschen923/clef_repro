@@ -8,11 +8,9 @@
 
     fig3_5_three_arm.png      三臂对照协议图
 
-**图 1-1 的版式参照彭越博士学位论文图 2.4**（《基于多模态对比学习的分泌效应蛋白预测
-模型设计》第 2.3.3 节），采用 A/B/C 三联面板、圆角容器、直角与梯形模块、张量堆叠与热图
-矩阵、旋转轴标签与底部图例；配色亦取自该图（浅蓝紫 #DEE7F6 / 青 #A7D8E2 / 粉 #E0C8E0 /
-黄 #F8F5BE / 绿 #D2E5C9 / 靛蓝标题 #3B3B98 / 红描边 #D9534F / 灰描边 #B0B0B0 /
-青色反向虚线 #9FD4D4）。
+架构图采用 A/B/C 三联面板、圆角容器、直角与梯形模块、张量堆叠与热图矩阵、
+旋转轴标签与底部图例；配色以浅蓝紫、青、粉、黄、绿为主色，
+辅以靛蓝标题、红描边、灰描边与青色反向虚线。
 
 用法：``python schematic.py``。
 """
@@ -29,13 +27,13 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Polygon, Rectang
 
 from style_journal import C, MM, apply_style
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-FIGURES_DIR = os.path.join(HERE, "figures")
+# 输出目录：相对当前运行目录（请在仓库根目录下运行）
+FIGURES_DIR = "figures"
 os.makedirs(FIGURES_DIR, exist_ok=True)
 
 apply_style()
 
-# ------------------------------------------------------------------ 彭越论文图 2.4 配色
+# ------------------------------------------------------------------ 架构图配色
 PAL = {
     "peri": "#DEE7F6",      # Transformer 模块 / PLM
     "peri_e": "#8C93AE",
@@ -61,7 +59,7 @@ PAL = {
     "box_e": "#B9C4DC",
 }
 
-# 氨基酸字母配色（与彭越论文图 2.4A 一致）
+# 氨基酸字母配色
 AA = {"M": "#C05AC0", "A": "#E08A3C", "T": "#E0A030", "P": "#4A6AC0",
       "G": "#3FA03F", "W": "#C05AC0", "I": "#3F8FC0", "R": "#3FA0A0"}
 
@@ -152,7 +150,7 @@ def _aa_row(ax, x, y, seq, fs=7.4, step=0.0190):
 
 
 # ======================================================================================
-# 图 1-1　CLEF 双编码器架构（版式参照彭越博士学位论文图 2.4）
+# 图 1-1　CLEF 双编码器架构
 # ======================================================================================
 def draw_architecture() -> None:
     with plt.rc_context({
@@ -400,7 +398,7 @@ def _save(fig, name: str) -> None:
     path = os.path.join(FIGURES_DIR, name)
     fig.savefig(path)
     plt.close(fig)
-    print(f"  [schematic] 已保存 {os.path.relpath(path, HERE).replace(chr(92), '/')}")
+    print(f"  [schematic] 已保存 {path}")
 
 
 def main() -> None:

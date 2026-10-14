@@ -33,9 +33,9 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 
 from evaluate import fit_pca, representation_diagnostics
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-RESULTS_DIR = os.path.join(HERE, "results")
-FIGURES_DIR = os.path.join(HERE, "figures")
+# 输入 / 输出目录：相对当前运行目录（请在仓库根目录下运行）
+RESULTS_DIR = "results"
+FIGURES_DIR = "figures"
 os.makedirs(FIGURES_DIR, exist_ok=True)
 
 plt.rcParams.update({

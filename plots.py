@@ -30,9 +30,9 @@ import numpy as np
 from evaluate import fit_pca, representation_diagnostics
 from style_journal import C, MM, apply_style, panel_label
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-RESULTS_DIR = os.path.join(HERE, "results")
-FIGURES_DIR = os.path.join(HERE, "figures")
+# 输入 / 输出目录：相对当前运行目录（请在仓库根目录下运行）
+RESULTS_DIR = "results"
+FIGURES_DIR = "figures"
 os.makedirs(FIGURES_DIR, exist_ok=True)
 
 apply_style()
@@ -56,7 +56,7 @@ def _save(fig, name: str) -> None:
     path = os.path.join(FIGURES_DIR, name)
     fig.savefig(path)
     plt.close(fig)
-    print(f"  [plots] 已保存 {os.path.relpath(path, HERE).replace(chr(92), '/')}")
+    print(f"  [plots] 已保存 {path}")
 
 
 # ======================================================================================
